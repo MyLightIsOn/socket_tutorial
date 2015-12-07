@@ -1,7 +1,10 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	block head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		header#banner
+			h1 Socket IO Tutorial
+		block content
+		footer Hope you enjoy your stay here
