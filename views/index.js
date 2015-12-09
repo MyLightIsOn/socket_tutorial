@@ -23,7 +23,7 @@ jade_debug.unshift(new jade.DebugItem( 5, "layout.jade" ));
 buf.push("<link rel=\"stylesheet\" href=\"/stylesheets/style.css\">");
 jade_debug.shift();
 jade_debug.unshift(new jade.DebugItem( 6, "layout.jade" ));
-buf.push("<script type=\"text/javascript\" src=\"/javascripts/jquery.min.js\">");
+buf.push("<script type=\"text/javascript\" src=\"/js/jquery.min.js\">");
 jade_debug.unshift(new jade.DebugItem( undefined, jade_debug[0].filename ));
 jade_debug.shift();
 buf.push("</script>");
