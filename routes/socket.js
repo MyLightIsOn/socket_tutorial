@@ -4,13 +4,6 @@ exports.initialize = function(server){
     io = io.listen(server);
     io.sockets.on('connection', function(socket){
 
-        socket.send(JSON.stringify(
-            {
-                type:'serverMessage',
-                message: 'Welcome to the socket.io tutorial chatroom'
-            }
-        ));
-
         socket.on('message', function(message){
             message = JSON.parse(message);
             if(message.type == 'userMessage'){
@@ -19,5 +12,14 @@ exports.initialize = function(server){
                 socket.send(JSON.stringify(message))
             }
         });
+
+        socket.on('set_name', function(data){
+            socket.emit('name_set', data);
+            socket.send(JSON.stringify({
+                    type: 'serverMessage',
+                    message: 'Welcome to the Chatroom ' + data.name
+                })
+            );
+        })
     })
 };
