@@ -20,6 +20,7 @@ exports.initialize = function(server){
                     message: 'Welcome to the Chatroom ' + data.name
                 })
             );
+            socket.broadcast.emit('user_entered', data);
         })
     })
 };

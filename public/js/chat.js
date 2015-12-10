@@ -19,11 +19,14 @@ socket.on('name_set', function(data){
         } else {
             $('#messages').append('<div class="' + data.type + '">' + data.message + '</div>')
         }
-    })
+    });
+});
+
+socket.on('user_entered', function(newUser){
+    $('#messages').append('<div class="systemMessage">' + newUser.name + ' has joined the room' + '</div>')
 });
 
 $(function(){
-
 
     $('#setname').click(function(){
        socket.emit('set_name', {
