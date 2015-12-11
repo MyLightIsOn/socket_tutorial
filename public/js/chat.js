@@ -9,14 +9,9 @@ chatServer.on('name_set', function (user){
         $('#messages').append('<div class="systemMessage">' + newUser.name + ' has joined the room' + '</div>')
     });
 
-    $('#send').click(function(){
-        var data = user;
-
-        data.message = $('#message').val();
-        data.type = 'userMessage';
-
-        chatClient.send(JSON.stringify(data));
-        $('#message').val('');
+    chatServer.on('message', function(message){
+        var data = JSON.parse(message);
+        $('#messages').append('<div class="' + data.type + '">' + data.message + '</div>');
     });
 
     chatClient.on('message', function(message){
@@ -26,7 +21,17 @@ chatServer.on('name_set', function (user){
         } else {
             $('#messages').append('<div class="' + data.type + '">' + data.message + '</div>')
         }
-    })
+    });
+
+    $('#send').click(function(){
+        var data = user;
+
+        data.message = $('#message').val();
+        data.type = 'userMessage';
+
+        chatClient.send(JSON.stringify(data));
+        $('#message').val('');
+    });
 });
 
 $(function(){

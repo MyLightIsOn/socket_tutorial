@@ -11,14 +11,17 @@ exports.initialize = function(server){
         socket.on('set_name', function(data){
             socket.emit('name_set', data);
             socket.broadcast.emit('user_entered', data);
+            socket.send(JSON.stringify({
+                type: 'serverMessage',
+                message: 'Welcome to the chatroom'
+            }))
         })
 
     });
 
-
     chatClient.on('connection', function(socket){
         socket.on('message', function(message){
-            console.log('message recieved: ' + message);
+
             message = JSON.parse(message);
             if(message.type == 'userMessage'){
                 socket.broadcast.send(JSON.stringify(message));
